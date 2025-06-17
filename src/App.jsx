@@ -1,7 +1,8 @@
 import React, { Children } from "react";
 import { people } from "./components/data";
 import { useState } from "react";
-import {sculptureList} from "./components/data"
+import {sculptureList} from "./components/data";
+//import {Greeting} from "./components/Greeting";
 
 function Item({name, isStudent}){
   return(
@@ -70,6 +71,35 @@ export default function Students(){
 
   let sculpture = sculptureList[index]
 
+  const [to, setTo] = useState('Denis')
+  const [message, setMessage] = useState('Hello')
+
+  function handleSubmit(e){
+    e.preventDefault()
+    setTimeout(() => {
+      alert(`You said ${message} to ${to}`);
+    }, 5000);
+  }
+
+  function Greeting(props){
+    return(
+        <div>
+            <p>Hello, {props.name}</p>
+            <p>You are welcomed to react.</p>
+        </div>
+    )
+  }
+
+  function Profile(props){
+    return(
+      <div>
+        <p>FirstName = {props.firstName}</p>
+        <p>LastName = {props.lastName}</p>
+        <p>Age = {props.age}</p>
+      </div>
+    )
+  }
+
   return(
     <div className="bg-white text-black p-20 flex flex-col gap-10">
       <h1>Students list</h1>
@@ -113,6 +143,30 @@ export default function Students(){
         <button onClick={handleMoreClick}>{showMore ? 'Hide ':'Show '} details</button>
         {showMore && <p>{sculpture.description}</p>}
         <img src={sculpture.url} alt={sculpture.alt} />
+      </div>
+
+      {/* <form onSubmit={handleSubmit}>
+        <label>
+          To: {' '}
+          <select 
+          value ={to}
+          onChange={e = setTo(e.target.value)}>
+            <option value="Denis">Denis</option>
+            <option value="John">John</option>
+          </select>
+          <textarea 
+          placeholder="Message"
+          value={message}
+          onChange={e = setMessage(e.target.value)}
+          ></textarea>
+          <button type="submit">Send</button>
+        </label>
+      </form> */}
+      <div>
+        <Greeting name="Denis"/>
+      </div>
+      <div>
+        <Profile firstName="Denis" lastName="Kipkurui" age={19}/>
       </div>
     </div>
   )
